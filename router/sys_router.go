@@ -4,6 +4,8 @@ import (
 	"github.com/gin-gonic/gin"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"go-admin/apis/geography"
+	"go-admin/apis/heroine"
 	log2 "go-admin/apis/log"
 	"go-admin/apis/monitor"
 	"go-admin/apis/system"
@@ -59,6 +61,17 @@ func sysNoCheckRoleRouter(r *gin.RouterGroup) {
 
 	registerSysTableRouter(v1)
 
+	registerGeographyRouter(v1)
+
+	registerHeroineRouter(v1)
+
+}
+
+func registerHeroineRouter(v1 *gin.RouterGroup) {
+	{
+		v1.POST("/heroine", heroine.InsertHeroine)
+		v1.GET("/heroinelist", heroine.GetHeroineLogList)
+	}
 }
 
 func registerDBRouter(api *gin.RouterGroup) {
@@ -102,6 +115,14 @@ func sysCheckRoleRouterInit(r *gin.RouterGroup, authMiddleware *jwtauth.GinJWTMi
 	registerMenuRouter(v1, authMiddleware)
 	registerLoginLogRouter(v1, authMiddleware)
 	registerOperLogRouter(v1, authMiddleware)
+	//registerGeographyRouter(v1, authMiddleware)
+}
+
+func registerGeographyRouter(v1 *gin.RouterGroup) {
+	//v1auth := v1.Use(authMiddleware.MiddlewareFunc()).Use(middleware.AuthCheckRole())
+	{
+		v1.GET("/country", geography.GetCountryList)
+	}
 }
 
 func registerBaseRouter(v1 *gin.RouterGroup, authMiddleware *jwt.GinJWTMiddleware) {

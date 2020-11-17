@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"go-admin/database"
 	orm "go-admin/database"
-	"go-admin/models"
 	"go-admin/models/gorm"
 	"go-admin/tools"
 	config2 "go-admin/tools/config"
@@ -42,10 +41,10 @@ func run() {
 	//4. 数据库迁移
 	_ = migrateModel()
 	log.Println("数据库结构初始化成功！")
-	//5. 数据初始化完成
-	if err := models.InitDb(); err != nil {
-		log.Fatal("数据库基础数据初始化失败！")
-	}
+	////5. 数据初始化完成
+	//if err := models.InitDb(); err != nil {
+	//	log.Fatal("数据库基础数据初始化失败！")
+	//}
 
 	usage = `数据库基础数据初始化成功`
 	fmt.Println(usage)
